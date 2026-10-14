@@ -5,6 +5,7 @@
 #include <chrono>
 #include <iomanip>
 #include <string>
+#include <omp.h>
 
 using Clock = std::chrono::high_resolution_clock;
 
@@ -55,6 +56,8 @@ public:
             throw std::runtime_error("Размеры матриц не совпадают!");
         }
         Matrix result(_n);
+
+#pragma omp parallel for
         for (int i = 0; i < _n; ++i) {
             const auto& arow = _data[i];
             auto& crow = result._data[i];
@@ -71,10 +74,13 @@ public:
 };
 
 int main(int argc, char** argv) {
-    const std::string fileA     = argc > 1 ? argv[1] : "Matrix(A).txt";
-    const std::string fileB     = argc > 2 ? argv[2] : "Matrix(B).txt";
-    const std::string fileC     = argc > 3 ? argv[3] : "RESULT.txt";
+    const std::string fileA = argc > 1 ? argv[1] : "Matrix(A).txt";
+    const std::string fileB = argc > 2 ? argv[2] : "Matrix(B).txt";
+    const std::string fileC = argc > 3 ? argv[3] : "RESULT.txt";
     const std::string fileStats = argc > 4 ? argv[4] : "stats.txt";
+    int threads = argc > 5 ? std::stoi(argv[5]) : 1;
+
+    omp_set_num_threads(threads);
 
     try {
         Matrix A, B;
@@ -83,7 +89,7 @@ int main(int argc, char** argv) {
 
         if (A.size() != B.size()) {
             std::cerr << "Ошибка: размеры матриц не совпадают (" << A.size()
-                      << " и " << B.size() << ")\n";
+                << " и " << B.size() << ")\n";
             return 1;
         }
         const int N = A.size();
@@ -96,13 +102,14 @@ int main(int argc, char** argv) {
         C.saveToFile(fileC);
 
         const long long operations = static_cast<long long>(N) * N * N;
-        const double flop   = 2.0 * N * N * N;
+        const double flop = 2.0 * N * N * N;
         const double gflops = (seconds > 0.0) ? flop / seconds / 1e9 : 0.0;
 
         auto report = [&](std::ostream& os) {
-            os << "ЛАБОРАТОРНАЯ РАБОТА: 1\n\n";
+            os << "ЛАБОРАТОРНАЯ РАБОТА: 2 (OpenMP)\n\n";
             os << "ВХОДНЫЕ ДАННЫЕ:\n\n";
-            os << "Размер матрицы: " << N << "x" << N << "\n\n";
+            os << "Размер матрицы: " << N << "x" << N << "\n";
+            os << "Потоков: " << threads << "\n\n";
             os << "Матрица A: " << fileA << "\n";
             os << "Матрица B: " << fileB << "\n\n";
             os << "РЕЗУЛЬТАТЫ\n";
@@ -112,17 +119,19 @@ int main(int argc, char** argv) {
             os << "Время выполнения: " << std::setprecision(6) << seconds * 1000.0 << " ms\n";
             os << "Объем задачи (операций): " << operations << "\n";
             os << "Производительность: " << std::setprecision(4) << gflops << " GFLOPS\n";
-        };
+            };
 
         report(std::cout);
         std::ofstream sout(fileStats);
         if (sout) {
             report(sout);
-        } else {
+        }
+        else {
             std::cerr << "Предупреждение: не удалось записать " << fileStats << "\n";
         }
 
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << "\n";
         return 1;
     }
