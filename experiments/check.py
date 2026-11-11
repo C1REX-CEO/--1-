@@ -11,7 +11,7 @@ from run import ROOT, save_matrix, load_matrix
 
 def main():
     p=argparse.ArgumentParser()
-    p.add_argument('backend',choices=['cuda','mpi'])
+    p.add_argument('backend',choices=['cuda','mpi','serial'])
     p.add_argument('--exe',required=True)
     p.add_argument('--launcher',default='mpiexec')
     p.add_argument('--work-dir',type=Path)
@@ -22,9 +22,10 @@ def main():
     ap,bp,cp,sp=[work/name for name in ['A.txt','B.txt','C.txt','stats.csv']]
     def command(config):
         base=[str(Path(args.exe).resolve()),str(ap),str(bp),str(cp),str(sp)]
+        if args.backend=='serial': return base
         return (shlex.split(args.launcher)+['-n',str(config)]+base if args.backend=='mpi'
                 else base+list(map(str,config)))
-    configs=([1,2,4,8] if args.backend=='mpi' else
+    configs=([1] if args.backend=='serial' else [1,2,4,8] if args.backend=='mpi' else
              [('naive',8,8),('naive',16,16),('naive',32,8),('tiled',8,8),('tiled',16,16),('tiled',32,32)])
     checks=[]
     for n in [1,2,3,7,17,33]:
@@ -43,7 +44,8 @@ def main():
         result=subprocess.run(command(configs[-1]),capture_output=True,timeout=60)
         assert result.returncode!=0,name
         checks.append(dict(invalid_input=name,rejected=True))
-    target=args.out or ROOT/('lab3_mpi' if args.backend=='mpi' else 'lab4_cuda')/'checks.json'
+    target=args.out or (ROOT/'lab3_mpi'/'checks_serial.json' if args.backend=='serial' else
+                       ROOT/('lab3_mpi' if args.backend=='mpi' else 'lab4_cuda')/'checks.json')
     target.parent.mkdir(parents=True,exist_ok=True)
     target.write_text(json.dumps(checks,indent=2),encoding='utf-8')
     print(f'{len(checks)} checks passed')

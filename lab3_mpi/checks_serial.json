@@ -1,0 +1,56 @@
+[
+  {
+    "n": 1,
+    "config": 1,
+    "verified": true
+  },
+  {
+    "n": 2,
+    "config": 1,
+    "verified": true
+  },
+  {
+    "n": 3,
+    "config": 1,
+    "verified": true
+  },
+  {
+    "n": 7,
+    "config": 1,
+    "verified": true
+  },
+  {
+    "n": 17,
+    "config": 1,
+    "verified": true
+  },
+  {
+    "n": 33,
+    "config": 1,
+    "verified": true
+  },
+  {
+    "invalid_input": "empty",
+    "rejected": true
+  },
+  {
+    "invalid_input": "zero",
+    "rejected": true
+  },
+  {
+    "invalid_input": "truncated",
+    "rejected": true
+  },
+  {
+    "invalid_input": "extra",
+    "rejected": true
+  },
+  {
+    "invalid_input": "overflow",
+    "rejected": true
+  },
+  {
+    "invalid_input": "mismatch",
+    "rejected": true
+  }
+]

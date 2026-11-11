@@ -5,7 +5,9 @@ CXXFLAGS ?= -O2 -std=c++17
 CUDA_ARCH ?= sm_86
 WIDTHS = 1 2 3 4 8 16
 
-.PHONY: simd mpi cuda
+.PHONY: simd mpi cuda serial lab3
+lab3: serial mpi
+serial: build/matrix_serial
 simd: $(addprefix build/myexp_,$(WIDTHS))
 mpi: build/matrix_mpi
 cuda: build/matrix_cuda
@@ -18,6 +20,9 @@ build/myexp_%: lab5_simd/main.cpp lab5_simd/CS149intrin.cpp lab5_simd/logger.cpp
 
 build/matrix_mpi: lab3_mpi/main.cpp common/matrix.hpp | build
 	$(MPICXX) $(CXXFLAGS) lab3_mpi/main.cpp -o $@
+
+build/matrix_serial: lab3_mpi/serial.cpp common/matrix.hpp | build
+	$(CXX) $(CXXFLAGS) lab3_mpi/serial.cpp -o $@
 
 build/matrix_cuda: lab4_cuda/main.cu common/matrix.hpp | build
 	$(NVCC) $(CXXFLAGS) -arch=$(CUDA_ARCH) lab4_cuda/main.cu -o $@
