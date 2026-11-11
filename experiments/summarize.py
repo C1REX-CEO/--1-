@@ -1,6 +1,7 @@
 """Build median tables and figures from measured CSV files only."""
 import argparse
 import csv
+import math
 from collections import defaultdict
 from pathlib import Path
 from statistics import median
@@ -12,8 +13,10 @@ def main():
     p=argparse.ArgumentParser()
     p.add_argument('backend',choices=['mpi','cuda','simd'])
     p.add_argument('--input',type=Path,required=True)
+    p.add_argument('--serial-input',type=Path,help='Sequential measurements from the same machine/run')
     args=p.parse_args()
     folder=args.input
+    if args.serial_input and args.backend!='mpi': p.error('--serial-input requires mpi')
     if args.backend=='simd':
         with (folder/'results.csv').open() as f: rows=list(csv.DictReader(f))
         widths=[int(r['width']) for r in rows]
@@ -47,6 +50,24 @@ def main():
         baseline={r['n']:r['total_ms'] for r in summary if r['config']=='1'}
         for r in summary:
             r['speedup']=baseline[r['n']]/r['total_ms']; r['efficiency']=r['speedup']/int(r['config'])
+    serial_times={}
+    if args.serial_input:
+        with (args.serial_input/'raw.csv').open() as f: serial=list(csv.DictReader(f))
+        serial_groups=defaultdict(list)
+        for row in serial:
+            if row['verified']!='True': raise ValueError('Unverified serial row')
+            time=float(row['total_ms'])
+            if not math.isfinite(time) or time<=0: raise ValueError('Invalid serial timing')
+            if int(row['processes'])!=1: raise ValueError('Serial baseline must have one process')
+            serial_groups[int(row['n'])].append(time)
+        if {r['label'] for r in serial}!={r['label'] for r in raw}:
+            raise ValueError('Serial/MPI labels differ: compare runs on the same machine')
+        serial_times={n:median(times) for n,times in serial_groups.items()}
+        for row in summary:
+            if row['n'] not in serial_times: raise ValueError('Missing serial baseline for size '+str(row['n']))
+            row['serial_ms']=serial_times[row['n']]
+            row['speedup_serial']=row['serial_ms']/row['total_ms']
+            row['efficiency_serial']=row['speedup_serial']/int(row['config'])
     with (folder/'summary.csv').open('w',newline='',encoding='utf-8') as f:
         writer=csv.DictWriter(f,fieldnames=list(summary[0])); writer.writeheader(); writer.writerows(summary)
     configs=sorted({r['config'] for r in summary})
@@ -61,10 +82,20 @@ def main():
         for config in configs:
             data=[r for r in summary if r['config']==config]
             ax.plot([r['n'] for r in data],[r[metric] for r in data],'o-',label=config)
+        if serial_times:
+            ax.plot(sorted(serial_times),[serial_times[n] for n in sorted(serial_times)],'k--',label='serial')
         ax.set(xlabel='Размер матрицы N',ylabel='Время, мс',title=metric)
         ax.grid(alpha=.3); ax.legend(); fig.tight_layout(); fig.savefig(folder/(metric+'.png'),dpi=160); plt.close(fig)
     if args.backend=='mpi':
-        for metric,ylabel in [('speedup','Ускорение T1/Tp'),('efficiency','Эффективность S/p')]:
+        metrics=[('speedup','Ускорение MPI: T1/Tp'),('efficiency','Эффективность MPI: S/p')]
+        if serial_times:
+            metrics += [('speedup_serial','Ускорение относительно serial'),
+                        ('efficiency_serial','Эффективность относительно serial')]
+            table+='### Сравнение с последовательной программой\n\n'
+            table+='| N | Процессы | Serial, мс | MPI, мс | Ускорение | Эффективность |\n|---:|---:|---:|---:|---:|---:|\n'
+            for r in summary:
+                table+=f'| {r["n"]} | {r["config"]} | {r["serial_ms"]:.4f} | {r["total_ms"]:.4f} | {r["speedup_serial"]:.3f} | {r["efficiency_serial"]:.3f} |\n'
+        for metric,ylabel in metrics:
             fig,ax=plt.subplots(figsize=(8,5))
             for n in sorted({r['n'] for r in summary}):
                 data=sorted([r for r in summary if r['n']==n],key=lambda r:int(r['config']))

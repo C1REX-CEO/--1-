@@ -1,4 +1,4 @@
-"""Reproducible, verified MPI/CUDA experiments. Run from any working directory."""
+"""Reproducible, verified serial/MPI/CUDA experiments."""
 import argparse
 import csv
 import datetime
@@ -32,7 +32,7 @@ def reference(a, b):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument('backend', choices=['mpi', 'cuda'])
+    p.add_argument('backend', choices=['mpi', 'cuda', 'serial'])
     p.add_argument('--exe', required=True)
     p.add_argument('--sizes', nargs='+', type=int, default=[200,400,800,1200,1600,2000])
     p.add_argument('--processes', nargs='+', type=int, default=[1,2,4,8])
@@ -53,13 +53,14 @@ def main():
                     logical_cpus=os.cpu_count(), python=sys.version, numpy=np.__version__,
                     date=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                     command=sys.argv, executable_sha256=hashlib.sha256(Path(exe).read_bytes()).hexdigest(),
-                    repeats=args.repeats, seed=42)
+                    repeats=args.repeats, seed=42, backend=args.backend)
     try:
         metadata['gpu'] = subprocess.check_output(['nvidia-smi','--query-gpu=name,driver_version','--format=csv,noheader'],text=True).strip()
     except (OSError, subprocess.CalledProcessError):
         pass
     (out/'environment.json').write_text(json.dumps(metadata,indent=2,ensure_ascii=False),encoding='utf-8')
-    configs = ([('mpi', count, 0) for count in args.processes] if args.backend == 'mpi' else
+    configs = ([('serial', 1, 0)] if args.backend == 'serial' else
+               [('mpi', count, 0) for count in args.processes] if args.backend == 'mpi' else
                [('naive',8,8),('naive',16,16),('naive',32,8),('tiled',8,8),('tiled',16,16),('tiled',32,32)])
     with (out/'raw.csv').open('w',newline='',encoding='utf-8') as output:
         writer = None
@@ -74,7 +75,7 @@ def main():
                 for repeat in range(args.repeats):
                     command = [exe,str(ap),str(bp),str(cp),str(sp)]
                     if args.backend == 'mpi': command = shlex.split(args.launcher)+['-n',str(x)]+command
-                    else: command += [kind,str(x),str(y)]
+                    elif args.backend == 'cuda': command += [kind,str(x),str(y)]
                     cp.unlink(missing_ok=True); sp.unlink(missing_ok=True)
                     run = subprocess.run(command,text=True,capture_output=True,timeout=900)
                     (out/f'{n}_{kind}_{x}_{y}_{repeat}.log').write_text(run.stdout+run.stderr,encoding='utf-8')
@@ -82,7 +83,7 @@ def main():
                     actual = load_matrix(cp)
                     if not np.array_equal(actual,expected): raise AssertionError(f'Incorrect output N={n}, config={kind,x,y}')
                     with sp.open(encoding='utf-8') as f: row = next(csv.DictReader(f))
-                    row.update(repeat=repeat,label=args.label,verified=True,max_abs_error=0)
+                    row.update(repeat=repeat,label=args.label,verified=True,max_abs_error=0,implementation=args.backend)
                     if writer is None:
                         writer = csv.DictWriter(output,fieldnames=list(row)); writer.writeheader()
                     writer.writerow(row); output.flush()
