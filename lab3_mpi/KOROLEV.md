@@ -91,10 +91,15 @@ qsub -A PROJECT_CODE \
 
 Каждое задание создаёт отдельную папку `lab3_mpi/results_korolev/JOB_ID/`:
 
-- `raw.csv`, `summary.csv`, `tables.md` и графики;
-- `checks.json` и stdout каждого запуска;
+- `raw.csv` (72 MPI-замера), `serial/raw.csv` (18 последовательных), `summary.csv`, `tables.md` и графики;
+- `checks.json`, `checks_serial.json` и stdout каждого запуска;
 - `environment.json`, `cluster_environment.txt`, `pbs_nodefile.txt`, `pbs_job.txt`;
-- `build.log`, отдельный бинарный файл и временные матрицы.
+- `build.log`, два бинарных файла и временные матрицы.
+
+Перед MPI-серией тот же PBS-скрипт выполняет отдельную последовательную
+программу. В `summary.csv` поля `speedup_serial`/`efficiency_serial` сравнивают
+MPI с ней; `speedup`/`efficiency` сохраняют сравнение с MPI на одном процессе.
+Пошаговая инструкция и содержимое архива для WinSCP — [START_HERE.md](START_HERE.md).
 
 Бинарный файл и временные данные исключены из Git. Существующий `raw.csv`
 защищён от повторной перезаписи скриптом. Локальная проверка в `lab3_mpi/checks.json`

@@ -15,18 +15,24 @@ cd "$(dirname "$0")/.."
 : "${RESULT_DIR:=lab3_mpi/results_korolev}"
 : "${PYTHON:=python3}"
 : "${MPICXX:=mpicxx}"
+: "${CXX:=g++}"
 mkdir -p "$RESULT_DIR/build"
 RESULT_DIR="$(cd "$RESULT_DIR" && pwd)"
-if [[ -e "$RESULT_DIR/raw.csv" ]]; then
+if [[ -e "$RESULT_DIR/raw.csv" || -e "$RESULT_DIR/serial/raw.csv" ]]; then
     echo "Result directory already contains measurements: $RESULT_DIR" >&2
     exit 1
 fi
 "$PYTHON" -c 'import sys; assert sys.version_info >= (3,10), "Python 3.10+ required"; import numpy, matplotlib'
-"$MPICXX" -O2 -std=c++17 lab3_mpi/main.cpp -o "$RESULT_DIR/build/matrix_mpi" 2>&1 | tee "$RESULT_DIR/build.log"
+bash lab3_mpi/build_linux.sh "$RESULT_DIR/build" 2>&1 | tee "$RESULT_DIR/build.log"
+"$PYTHON" experiments/check.py serial --exe "$RESULT_DIR/build/matrix_serial" \
+    --work-dir "$RESULT_DIR/work/check-serial" --out "$RESULT_DIR/checks_serial.json"
 "$PYTHON" experiments/check.py mpi --exe "$RESULT_DIR/build/matrix_mpi" --launcher "$MPI_LAUNCHER" \
     --work-dir "$RESULT_DIR/work/check" --out "$RESULT_DIR/checks.json"
+"$PYTHON" experiments/run.py serial --exe "$RESULT_DIR/build/matrix_serial" \
+    --label "$RUN_LABEL" --out "$RESULT_DIR/serial" \
+    --work-dir "$RESULT_DIR/work/serial" --sizes 200 400 800 1200 1600 2000 --repeats 3
 "$PYTHON" experiments/run.py mpi --exe "$RESULT_DIR/build/matrix_mpi" \
     --launcher "$MPI_LAUNCHER" --label "$RUN_LABEL" --out "$RESULT_DIR" \
     --work-dir "$RESULT_DIR/work/benchmark" \
     --sizes 200 400 800 1200 1600 2000 --processes 1 2 4 8 --repeats 3
-"$PYTHON" experiments/summarize.py mpi --input "$RESULT_DIR"
+"$PYTHON" experiments/summarize.py mpi --input "$RESULT_DIR" --serial-input "$RESULT_DIR/serial"

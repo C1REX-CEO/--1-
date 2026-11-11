@@ -35,7 +35,8 @@ mkdir -p "$RESULT_DIR"
     hostname
     printf 'PBS_JOBID=%s\nPBS_NP=%s\nPBS_NODEFILE=%s\n' "$PBS_JOBID" "$PBS_NP" "$PBS_NODEFILE"
     (set +u; module list) 2>&1
-    command -v "${MPICXX:-mpicxx}" mpirun "${PYTHON:-python3}"
+    command -v "${CXX:-g++}" "${MPICXX:-mpicxx}" mpirun "${PYTHON:-python3}"
+    "${CXX:-g++}" --version
     "${MPICXX:-mpicxx}" --version
     if command -v lscpu >/dev/null; then lscpu; fi
 } > "$RESULT_DIR/cluster_environment.txt" 2>&1
