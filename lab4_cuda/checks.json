@@ -1,0 +1,350 @@
+[
+  {
+    "n": 1,
+    "config": [
+      "naive",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 1,
+    "config": [
+      "naive",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 1,
+    "config": [
+      "naive",
+      32,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 1,
+    "config": [
+      "tiled",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 1,
+    "config": [
+      "tiled",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 1,
+    "config": [
+      "tiled",
+      32,
+      32
+    ],
+    "verified": true
+  },
+  {
+    "n": 2,
+    "config": [
+      "naive",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 2,
+    "config": [
+      "naive",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 2,
+    "config": [
+      "naive",
+      32,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 2,
+    "config": [
+      "tiled",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 2,
+    "config": [
+      "tiled",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 2,
+    "config": [
+      "tiled",
+      32,
+      32
+    ],
+    "verified": true
+  },
+  {
+    "n": 3,
+    "config": [
+      "naive",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 3,
+    "config": [
+      "naive",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 3,
+    "config": [
+      "naive",
+      32,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 3,
+    "config": [
+      "tiled",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 3,
+    "config": [
+      "tiled",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 3,
+    "config": [
+      "tiled",
+      32,
+      32
+    ],
+    "verified": true
+  },
+  {
+    "n": 7,
+    "config": [
+      "naive",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 7,
+    "config": [
+      "naive",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 7,
+    "config": [
+      "naive",
+      32,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 7,
+    "config": [
+      "tiled",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 7,
+    "config": [
+      "tiled",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 7,
+    "config": [
+      "tiled",
+      32,
+      32
+    ],
+    "verified": true
+  },
+  {
+    "n": 17,
+    "config": [
+      "naive",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 17,
+    "config": [
+      "naive",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 17,
+    "config": [
+      "naive",
+      32,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 17,
+    "config": [
+      "tiled",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 17,
+    "config": [
+      "tiled",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 17,
+    "config": [
+      "tiled",
+      32,
+      32
+    ],
+    "verified": true
+  },
+  {
+    "n": 33,
+    "config": [
+      "naive",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 33,
+    "config": [
+      "naive",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 33,
+    "config": [
+      "naive",
+      32,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 33,
+    "config": [
+      "tiled",
+      8,
+      8
+    ],
+    "verified": true
+  },
+  {
+    "n": 33,
+    "config": [
+      "tiled",
+      16,
+      16
+    ],
+    "verified": true
+  },
+  {
+    "n": 33,
+    "config": [
+      "tiled",
+      32,
+      32
+    ],
+    "verified": true
+  },
+  {
+    "invalid_input": "empty",
+    "rejected": true
+  },
+  {
+    "invalid_input": "zero",
+    "rejected": true
+  },
+  {
+    "invalid_input": "truncated",
+    "rejected": true
+  },
+  {
+    "invalid_input": "extra",
+    "rejected": true
+  },
+  {
+    "invalid_input": "overflow",
+    "rejected": true
+  },
+  {
+    "invalid_input": "mismatch",
+    "rejected": true
+  }
+]

@@ -1,3 +1,19 @@
+# Параллельное программирование — лабораторные работы
+
+| Работа | Отчёт | Реализация |
+|---|---|---|
+| 1. Последовательное умножение | [README_lab1.md](README_lab1.md) | исходная работа |
+| 2. OpenMP | ниже на этой странице | [main.cpp](main.cpp) |
+| 3. MPI | [lab3_mpi/README.md](lab3_mpi/README.md) | [код](lab3_mpi/main.cpp) |
+| 4. CUDA | [lab4_cuda/README.md](lab4_cuda/README.md) | [код](lab4_cuda/main.cu) |
+| 5. Stanford CS149: SIMD | [lab5_simd/README.md](lab5_simd/README.md) | [код](lab5_simd/main.cpp) |
+
+Условия: [assignments.txt](assignments.txt). Общая инструкция: [RUNNING.md](RUNNING.md).
+ЛР №3 пока содержит локальную проверку; обязательный запуск на «Сергее Королёве»
+не выполнен. Локальные измерения не выдаются за результаты суперкомпьютера.
+
+---
+
 # Лабораторная работа 2 — умножение матриц с OpenMP (C++)
 
 Дисциплина: Параллельное программирование.

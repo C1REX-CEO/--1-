@@ -1,0 +1,182 @@
+[
+  {
+    "width": 1,
+    "n": 1,
+    "passed": true
+  },
+  {
+    "width": 1,
+    "n": 2,
+    "passed": true
+  },
+  {
+    "width": 1,
+    "n": 3,
+    "passed": true
+  },
+  {
+    "width": 1,
+    "n": 10000,
+    "passed": true
+  },
+  {
+    "width": 2,
+    "n": 1,
+    "passed": true
+  },
+  {
+    "width": 2,
+    "n": 2,
+    "passed": true
+  },
+  {
+    "width": 2,
+    "n": 3,
+    "passed": true
+  },
+  {
+    "width": 2,
+    "n": 4,
+    "passed": true
+  },
+  {
+    "width": 2,
+    "n": 10000,
+    "passed": true
+  },
+  {
+    "width": 3,
+    "n": 1,
+    "passed": true
+  },
+  {
+    "width": 3,
+    "n": 3,
+    "passed": true
+  },
+  {
+    "width": 3,
+    "n": 4,
+    "passed": true
+  },
+  {
+    "width": 3,
+    "n": 5,
+    "passed": true
+  },
+  {
+    "width": 3,
+    "n": 6,
+    "passed": true
+  },
+  {
+    "width": 3,
+    "n": 10000,
+    "passed": true
+  },
+  {
+    "width": 4,
+    "n": 1,
+    "passed": true
+  },
+  {
+    "width": 4,
+    "n": 3,
+    "passed": true
+  },
+  {
+    "width": 4,
+    "n": 4,
+    "passed": true
+  },
+  {
+    "width": 4,
+    "n": 5,
+    "passed": true
+  },
+  {
+    "width": 4,
+    "n": 7,
+    "passed": true
+  },
+  {
+    "width": 4,
+    "n": 8,
+    "passed": true
+  },
+  {
+    "width": 4,
+    "n": 10000,
+    "passed": true
+  },
+  {
+    "width": 8,
+    "n": 1,
+    "passed": true
+  },
+  {
+    "width": 8,
+    "n": 3,
+    "passed": true
+  },
+  {
+    "width": 8,
+    "n": 8,
+    "passed": true
+  },
+  {
+    "width": 8,
+    "n": 9,
+    "passed": true
+  },
+  {
+    "width": 8,
+    "n": 15,
+    "passed": true
+  },
+  {
+    "width": 8,
+    "n": 16,
+    "passed": true
+  },
+  {
+    "width": 8,
+    "n": 10000,
+    "passed": true
+  },
+  {
+    "width": 16,
+    "n": 1,
+    "passed": true
+  },
+  {
+    "width": 16,
+    "n": 3,
+    "passed": true
+  },
+  {
+    "width": 16,
+    "n": 16,
+    "passed": true
+  },
+  {
+    "width": 16,
+    "n": 17,
+    "passed": true
+  },
+  {
+    "width": 16,
+    "n": 31,
+    "passed": true
+  },
+  {
+    "width": 16,
+    "n": 32,
+    "passed": true
+  },
+  {
+    "width": 16,
+    "n": 10000,
+    "passed": true
+  }
+]

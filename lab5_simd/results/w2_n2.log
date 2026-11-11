@@ -1,0 +1,13 @@
+CLAMPED EXPONENT (required) 
+Results matched with answer!
+****************** Printing Vector Unit Statistics *******************
+Vector Width:              2
+Total Vector Instructions: 30
+Vector Utilization:        93.3%
+Utilized Vector Lanes:     56
+Total Vector Lanes:        60
+************************ Result Verification *************************
+Passed!!!
+
+ARRAY SUM (bonus) 
+Passed!!!

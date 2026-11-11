@@ -1,0 +1,24 @@
+{
+  "label": "local-i5-11400f",
+  "platform": "Windows-10-10.0.19045-SP0",
+  "hostname": "Compik67",
+  "cpu": "Intel64 Family 6 Model 167 Stepping 1, GenuineIntel",
+  "logical_cpus": 12,
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "numpy": "2.5.4",
+  "date": "2026-11-06T13:13:00.077849+00:00",
+  "command": [
+    "experiments/run.py",
+    "mpi",
+    "--exe",
+    "build/matrix_mpi.exe",
+    "--label",
+    "local-i5-11400f",
+    "--out",
+    "lab3_mpi/results_local"
+  ],
+  "executable_sha256": "4aa13acfaea544d5bd6d2820bc385d017a7261256846e9973c9bbed7bad6d858",
+  "repeats": 3,
+  "seed": 42,
+  "gpu": "NVIDIA GeForce RTX 3060, 621.01"
+}

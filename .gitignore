@@ -1,0 +1,9 @@
+build/
+__pycache__/
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+experiments/work/
+lab3_mpi/results_korolev/*/work/
