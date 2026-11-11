@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT/'build/deploy-slurm/lab3-upload'
 FILES = ['common/matrix.hpp', 'lab3_mpi/main.cpp', 'lab3_mpi/serial.cpp',
          'lab3_mpi/build_linux.sh', 'lab3_mpi/job.slurm', 'lab3_mpi/slurm_mpirun.sh',
+         'lab3_mpi/submit_slurm.sh',
          'lab3_mpi/run_portable.py', 'lab3_mpi/START_HERE.md', 'lab3_mpi/SLURM.md']
 
 
