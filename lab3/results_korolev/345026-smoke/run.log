@@ -1,0 +1,16 @@
+N=1 serial p=1 repeat=1: verified, 0.001225 ms
+N=1 mpi p=1 repeat=1: verified, 0.042200088501 ms
+N=1 mpi p=2 repeat=1: verified, 0.0371932983398 ms
+N=1 mpi p=4 repeat=1: verified, 0.0600814819336 ms
+N=1 mpi p=8 repeat=1: verified, 0.0529289245605 ms
+N=3 serial p=1 repeat=1: verified, 0.001296 ms
+N=3 mpi p=1 repeat=1: verified, 0.0419616699219 ms
+N=3 mpi p=2 repeat=1: verified, 0.0450611114502 ms
+N=3 mpi p=4 repeat=1: verified, 0.114917755127 ms
+N=3 mpi p=8 repeat=1: verified, 0.0441074371338 ms
+N=17 serial p=1 repeat=1: verified, 0.009265 ms
+N=17 mpi p=1 repeat=1: verified, 0.046968460083 ms
+N=17 mpi p=2 repeat=1: verified, 0.0510215759277 ms
+N=17 mpi p=4 repeat=1: verified, 0.0779628753662 ms
+N=17 mpi p=8 repeat=1: verified, 0.06103515625 ms
+SUCCESS: /home/2025-00231/lab3-upload/lab3_mpi/results_korolev/345026-smoke

@@ -7,3 +7,6 @@ __pycache__/
 *.lib
 experiments/work/
 lab3_mpi/results_korolev/*/work/
+lab3/experiments/work/
+lab3/results_korolev/*/work/
+lab3/results_korolev/*/build/

@@ -15,14 +15,14 @@ cuda: build/matrix_cuda
 build:
 	mkdir -p build
 
-build/myexp_%: lab5_simd/main.cpp lab5_simd/CS149intrin.cpp lab5_simd/logger.cpp lab5_simd/CS149intrin.h lab5_simd/logger.h | build
-	$(CXX) $(CXXFLAGS) -DVECTOR_WIDTH=$* lab5_simd/main.cpp lab5_simd/CS149intrin.cpp lab5_simd/logger.cpp -o $@
+build/myexp_%: lab5/main.cpp lab5/CS149intrin.cpp lab5/logger.cpp lab5/CS149intrin.h lab5/logger.h | build
+	$(CXX) $(CXXFLAGS) -DVECTOR_WIDTH=$* lab5/main.cpp lab5/CS149intrin.cpp lab5/logger.cpp -o $@
 
-build/matrix_mpi: lab3_mpi/main.cpp common/matrix.hpp | build
-	$(MPICXX) $(CXXFLAGS) lab3_mpi/main.cpp -o $@
+build/matrix_mpi: lab3/main.cpp lab3/common/matrix.hpp | build
+	$(MPICXX) $(CXXFLAGS) lab3/main.cpp -o $@
 
-build/matrix_serial: lab3_mpi/serial.cpp common/matrix.hpp | build
-	$(CXX) $(CXXFLAGS) lab3_mpi/serial.cpp -o $@
+build/matrix_serial: lab3/serial.cpp lab3/common/matrix.hpp | build
+	$(CXX) $(CXXFLAGS) lab3/serial.cpp -o $@
 
-build/matrix_cuda: lab4_cuda/main.cu common/matrix.hpp | build
-	$(NVCC) $(CXXFLAGS) -arch=$(CUDA_ARCH) lab4_cuda/main.cu -o $@
+build/matrix_cuda: lab4/main.cu lab4/common/matrix.hpp | build
+	$(NVCC) $(CXXFLAGS) -arch=$(CUDA_ARCH) lab4/main.cu -o $@

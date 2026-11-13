@@ -1,0 +1,20 @@
+srun: cluster configuration lacks support for cpu binding
+[0] MPI startup(): Multi-threaded optimized library
+[0] MPI startup(): shm data transfer mode
+[1] MPI startup(): shm data transfer mode
+[2] MPI startup(): shm data transfer mode
+[3] MPI startup(): shm data transfer mode
+[4] MPI startup(): shm data transfer mode
+[5] MPI startup(): shm data transfer mode
+[6] MPI startup(): shm data transfer mode
+[7] MPI startup(): shm data transfer mode
+[0] MPI startup(): Rank    Pid      Node name  Pin cpu
+[0] MPI startup(): 0       17875    n239.ssc   {0}
+[0] MPI startup(): 1       17876    n239.ssc   {1}
+[0] MPI startup(): 2       17877    n239.ssc   {2}
+[0] MPI startup(): 3       17878    n239.ssc   {3}
+[0] MPI startup(): 4       17879    n239.ssc   {4}
+[0] MPI startup(): 5       17880    n239.ssc   {5}
+[0] MPI startup(): 6       17881    n239.ssc   {6}
+[0] MPI startup(): 7       17882    n239.ssc   {7}
+N=400 processes=8 total_ms=9.45711

@@ -1,7 +1,7 @@
 # Запуск лабораторных 3–5
 
 Для текущего окружения «Сергея Королёва» (Slurm, проверено 11.11.2026)
-следуйте [lab3_mpi/SLURM.md](lab3_mpi/SLURM.md). Прежний сценарий PBS
+следуйте [lab3/SLURM.md](lab3/SLURM.md). Прежний сценарий PBS
 не подходит к этому подключению.
 
 Все команды ниже выполняются из корня репозитория. Первые две лабораторные сохранены.
@@ -14,18 +14,18 @@
 Нужны C++17, Python 3.10+, MPI для работы 3, CUDA Toolkit и NVIDIA GPU для работы 4.
 
 ```bash
-python3 -m pip install -r experiments/requirements.txt
+python3 -m pip install -r lab3/experiments/requirements.txt
 make simd
-python3 lab5_simd/run_experiments.py --pattern 'build/myexp_{width}'
-python3 experiments/summarize.py simd --input lab5_simd/results
+python3 lab5/run_experiments.py --pattern 'build/myexp_{width}'
+python3 lab3/experiments/summarize.py simd --input lab5/results
 make mpi
-python3 experiments/check.py mpi --exe build/matrix_mpi
-python3 experiments/run.py mpi --exe build/matrix_mpi --label local --out lab3_mpi/results_local
-python3 experiments/summarize.py mpi --input lab3_mpi/results_local
+python3 lab3/experiments/check.py mpi --exe build/matrix_mpi
+python3 lab3/experiments/run.py mpi --exe build/matrix_mpi --label local --out lab3/results_local
+python3 lab3/experiments/summarize.py mpi --input lab3/results_local
 make cuda CUDA_ARCH=sm_86
-python3 experiments/check.py cuda --exe build/matrix_cuda
-python3 experiments/run.py cuda --exe build/matrix_cuda --label my-gpu --out lab4_cuda/results
-python3 experiments/summarize.py cuda --input lab4_cuda/results
+python3 lab3/experiments/check.py cuda --exe build/matrix_cuda
+python3 lab3/experiments/run.py cuda --exe build/matrix_cuda --label my-gpu --out lab4/results
+python3 lab3/experiments/summarize.py cuda --input lab4/results
 ```
 
 `sm_86` соответствует RTX 3060. Для другой GPU укажите её поддерживаемую архитектуру.
@@ -42,18 +42,18 @@ Command Prompt. `build_windows.cmd` также умеет находить ис�
 установку VS 2026 и выбирать установленный toolset 14.44, совместимый с CUDA 12.8.
 
 ```bat
-python -m pip install -r experiments/requirements.txt
+python -m pip install -r lab3/experiments/requirements.txt
 build_windows.cmd
 build_windows.cmd mpi
 build_windows.cmd cuda
-python lab5_simd/run_experiments.py
-python experiments/check.py mpi --exe build/matrix_mpi.exe
-python experiments/check.py cuda --exe build/matrix_cuda.exe
-python experiments/run.py mpi --exe build/matrix_mpi.exe --label local --out lab3_mpi/results_local
-python experiments/run.py cuda --exe build/matrix_cuda.exe --label my-gpu --out lab4_cuda/results
-python experiments/summarize.py mpi --input lab3_mpi/results_local
-python experiments/summarize.py cuda --input lab4_cuda/results
-python experiments/summarize.py simd --input lab5_simd/results
+python lab5/run_experiments.py
+python lab3/experiments/check.py mpi --exe build/matrix_mpi.exe
+python lab3/experiments/check.py cuda --exe build/matrix_cuda.exe
+python lab3/experiments/run.py mpi --exe build/matrix_mpi.exe --label local --out lab3/results_local
+python lab3/experiments/run.py cuda --exe build/matrix_cuda.exe --label my-gpu --out lab4/results
+python lab3/experiments/summarize.py mpi --input lab3/results_local
+python lab3/experiments/summarize.py cuda --input lab4/results
+python lab3/experiments/summarize.py simd --input lab5/results
 ```
 
 При необходимости задайте `CUDA_PATH`, `MSMPI_INC`, `MSMPI_LIB64` и добавьте
@@ -74,17 +74,17 @@ MPI SDK — в соседней `.lab-tools`. Эти инструменты не
 - Чтение/запись текстовых файлов и верификация в измеряемое время не входят.
 - Программы отклоняют некорректные размеры, неполные/избыточные файлы и числа,
   способные вызвать переполнение int64 (используется консервативная граница).
-- Папка `experiments/work` содержит временные матрицы; в Git она не включается.
+- Папка `lab3/experiments/work` содержит временные матрицы; в Git она не включается.
 
 ## Что осталось для сдачи MPI
 
 Официальные инструкции изучены: SSH `sk.ssau.ru`, TORQUE/Moab, подача задания
-через `qsub`. Подготовлены `lab3_mpi/job.pbs` и адаптер Intel MPI по примеру СКЦ.
-Подробная инструкция: [KOROLEV.md](lab3_mpi/KOROLEV.md).
+через `qsub`. Подготовлены `lab3/job.pbs` и адаптер Intel MPI по примеру СКЦ.
+Подробная инструкция: [KOROLEV.md](lab3/KOROLEV.md).
 Для загрузки через WinSCP подготовлен небольшой архив: запустите
-`python lab3_mpi/prepare_upload.py` и возьмите `build/lab3-korolev-upload.zip`.
+`python lab3/prepare_upload.py` и возьмите `build/lab3-korolev-upload.zip`.
 Он содержит отдельные последовательную и MPI-программы, скрипты сборки,
-PBS-задание и [пошаговую инструкцию](lab3_mpi/START_HERE.md).
+PBS-задание и [пошаговую инструкцию](lab3/START_HERE.md).
 Нужны подключение к разрешённой сети (в том числе университетский VPN),
 SSH-учётная запись и код проекта. Модули компилятора/MPI и Python нужно проверить
 в действующем окружении; опубликованные версии ПО старые.

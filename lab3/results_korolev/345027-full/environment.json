@@ -1,0 +1,125 @@
+{
+  "label": "korolev-345027",
+  "mode": "full",
+  "platform": "Linux-3.10.0-1160.el7.x86_64-x86_64-with-centos-7.9.2009-Core",
+  "hostname": "n239.ssc",
+  "python": "3.6.8 (default, Oct 13 2020, 16:18:22) \n[GCC 4.8.5 20150623 (Red Hat 4.8.5-44)]",
+  "command": [
+    "lab3_mpi/run_portable.py",
+    "--mode",
+    "full",
+    "--inputs",
+    "inputs",
+    "--serial",
+    "/home/2025-00231/lab3-upload/lab3_mpi/results_korolev/345027-full/build/matrix_serial",
+    "--mpi",
+    "/home/2025-00231/lab3-upload/lab3_mpi/results_korolev/345027-full/build/matrix_mpi",
+    "--launcher",
+    "bash lab3_mpi/slurm_mpirun.sh",
+    "--out",
+    "/home/2025-00231/lab3-upload/lab3_mpi/results_korolev/345027-full",
+    "--label",
+    "korolev-345027"
+  ],
+  "date": "2026-11-11T15:58:27.373474+00:00",
+  "slurm": {
+    "SLURM_NODELIST": "n239",
+    "SLURM_JOB_NAME": "lab3",
+    "SLURM_TOPOLOGY_ADDR": "n239",
+    "SLURM_THREADS_PER_CORE": "1",
+    "SLURM_PRIO_PROCESS": "0",
+    "SLURM_NODE_ALIASES": "(null)",
+    "SLURM_EXPORT_ENV": "ALL,LAB3_BUILD_DIR=/home/2025-00231/lab3-upload/build/korolev.l0KlgDLN",
+    "SLURM_JOB_QOS": "normal",
+    "SLURM_HINT": "nomultithread",
+    "SLURM_TOPOLOGY_ADDR_PATTERN": "node",
+    "SLURM_NNODES": "1",
+    "SLURM_JOBID": "345027",
+    "SLURM_NTASKS": "8",
+    "SLURM_TASKS_PER_NODE": "8",
+    "SLURM_WORKING_CLUSTER": "sk:mgt-vm:6817:9216:102",
+    "SLURM_CONF": "/var/spool/slurm/d/conf-cache/slurm.conf",
+    "SLURM_JOB_ID": "345027",
+    "SLURM_CPUS_PER_TASK": "1",
+    "SLURM_JOB_USER": "2025-00231",
+    "SLURM_JOB_UID": "1121093783",
+    "SLURM_NODEID": "0",
+    "SLURM_SUBMIT_DIR": "/home/2025-00231/lab3-upload",
+    "SLURM_TASK_PID": "17089",
+    "SLURM_NPROCS": "8",
+    "SLURM_CPUS_ON_NODE": "12",
+    "SLURM_PROCID": "0",
+    "SLURM_JOB_NODELIST": "n239",
+    "SLURM_LOCALID": "0",
+    "SLURM_GET_USER_ENV": "1",
+    "SLURM_JOB_GID": "1121068612",
+    "SLURM_JOB_CPUS_PER_NODE": "12",
+    "SLURM_CLUSTER_NAME": "sk",
+    "SLURM_GTIDS": "0",
+    "SLURM_SUBMIT_HOST": "login2",
+    "SLURM_JOB_PARTITION": "batch",
+    "SLURM_JOB_ACCOUNT": "soi-group",
+    "SLURM_JOB_NUM_NODES": "1",
+    "SLURM_MEM_PER_NODE": "4096"
+  },
+  "verification": "SHA256 of complete canonical output vs offline NumPy reference",
+  "input_manifest": {
+    "numpy": "2.5.4",
+    "seed": "42+N",
+    "range": [
+      -10,
+      10
+    ],
+    "reference": "NumPy float64 matmul converted to int64; exact for these bounded integers",
+    "matrices": {
+      "1": {
+        "A": "5d90ef7fc0d040fd56a1e48697cfa99e0dfaf4fd803aefefc3b5053ec1d36aea",
+        "B": "8391e9ff91c3c6402f9596a8c9e82d4ceaa7815687f5854f7e1a23b194be4968",
+        "C": "5d90ef7fc0d040fd56a1e48697cfa99e0dfaf4fd803aefefc3b5053ec1d36aea"
+      },
+      "3": {
+        "A": "ebf23d35ca6f912278ff347155a6acfd5cdcf44c27ae40a99ba2d48c22bdeb11",
+        "B": "86dee5955ca3acfd1a7234fd74aa9de1d149c3cf666af9ef1456dd4324df7bdc",
+        "C": "aa8e7f18977150d784893f6edb07ab4aedcff29b945eccde3b4b10b0ded6d794"
+      },
+      "17": {
+        "A": "ec8271f952142aeb3262842e8e91e3fc4ea79d3988efde554eedaf095498f2d7",
+        "B": "b40adfbba6ff72de6de115e291e0c9837195e04cc8f14566a612b56903e1ad47",
+        "C": "479af84484f9deea38e3718566938fd3778b7e99732cf6dec47b8012e195b7da"
+      },
+      "200": {
+        "A": "a7a7de88bdaf13d4f12f0c907519dbfc94419f33154ac0c86e04d7c1003cfa5b",
+        "B": "16e525fe1b01c6d174ece0ee644f2af2cc7b45a5d4390357f6c58061cade57df",
+        "C": "499f9691690df3477fa844c273a3d8981f36710085772e991cf3e7f3e4bd6bee"
+      },
+      "400": {
+        "A": "e5741acc2b3c635a5e40b4886b10c15c4e484f5af1f3018eb1b7c4527dedd47a",
+        "B": "2372470489a99db178774c9e881af942affd2ab0a700f02dcac098010dddcf9d",
+        "C": "ec0cac8e9732d72ad9fb2eed978e24cb67668d504dc6b93cfe881f743c99febf"
+      },
+      "800": {
+        "A": "69cdac099248fb6b25f5e6cb902bfa783ab802b8a6ff700a4834509c02ca68ae",
+        "B": "eb91c52cf3403e6e4b7cfbc09ae6d937f6d35f7e949205ecbd485188eaab745d",
+        "C": "6befe75d632b3abae643ed0a95df42c45eaa5cddf7658b21e1ec083c7302fcc5"
+      },
+      "1200": {
+        "A": "48339aaae6c4bfb29a33d551e986b0a78deb446903f823259c1e41430157b077",
+        "B": "80cce7e506022e1da7da5adbdbe94e24e76c2c47a59a5952a38770921c6cc9c5",
+        "C": "49e5f1372a3dd7f92d6a8e0ef455a13f2eccf903084b861ad7efee6ab96e954d"
+      },
+      "1600": {
+        "A": "e24e4919e4b26029b945cb288ede8578f30ba107fa1ce74d96a056c69527ddf5",
+        "B": "8b4bc82473dd89a55bb083c660e5f73fd4161023991ff3c062ed0e8da09b0f65",
+        "C": "795f8830240a63bef83b4b8aa5b92b81e3f016854529d0f2b63c8adba9e0b0e6"
+      },
+      "2000": {
+        "A": "bed2c020184ef2a1abca1edc6bcfe6fda46f1ee683f7c0e5063f814f7e87ab34",
+        "B": "66b61fa702d2faf1317f795f5fb84f082e366e25e0f5d00f0b25c66ec35f400a",
+        "C": "3d55619367e48fe5a3af7cd54b5ec652e1eb3c64ab94eb95db556a3bb2211af6"
+      }
+    }
+  },
+  "repeats": 3,
+  "serial_sha256": "e4ec874db0d30ae424dcf73dfb874e67190285b7930ede67da7c7243eb41de69",
+  "mpi_sha256": "4410219324258be9d107a3761c1d18beb8f5d8f684fd17aa9e1d19ce4f348b40"
+}

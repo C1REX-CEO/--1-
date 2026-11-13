@@ -1,0 +1,4 @@
+n,processes,total_ms,compute_ms,gops,repeat,label,verified,max_abs_error,implementation,result_sha256
+1,1,0.001225,0.001225,0.00163265306122,0,korolev-345026,True,0,serial,5d90ef7fc0d040fd56a1e48697cfa99e0dfaf4fd803aefefc3b5053ec1d36aea
+3,1,0.001296,0.001296,0.0416666666667,0,korolev-345026,True,0,serial,aa8e7f18977150d784893f6edb07ab4aedcff29b945eccde3b4b10b0ded6d794
+17,1,0.009265,0.009265,1.06055045872,0,korolev-345026,True,0,serial,479af84484f9deea38e3718566938fd3778b7e99732cf6dec47b8012e195b7da
